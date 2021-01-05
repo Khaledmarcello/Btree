@@ -58,21 +58,22 @@ public:
             }
 
 
-            void printNodes(){
+            void printNodes(int i){
 
                 for(int index=0;index<counter;index++){
                     cout<<key[index]<<" ";
                 }
                 if(isLeaf==false){
-                    int loop=0;
-                    while(children[loop]!=NULL){
+                    i++;
+                    for(int j=0;j<=counter;j++){
+
                         cout<<endl;
                         cout<<" "<<"";
-                        children[loop]->printNodes();
-                        loop++;
-                        }
+                        children[j]->printNodes(i);
+
+
                 }
-            }
+            }}
 
 
 
@@ -109,18 +110,18 @@ void BTree<T,order>::Insert(T value)
 		newRoot->split(0);
 	}
 
-	// Work down the tree.
+
 	Node<T,order> *curr = root;
 	while (!curr->isLeaf) {
 
-		// Find the proper child to go to.
+
 		int index = curr->counter - 1;
 		while (index >= 0 && value <curr->key[index]) {
 			index--;
 		}
 		index++;
 
-		// Split child if full.
+
 		if (curr->children[index]->counter == order - 1) {
 			curr->split(index);
 			if (curr->key[index]<value) {
@@ -142,13 +143,13 @@ template <class T,int order>
 void BTree<T,order>::Print()
 {
     if(root!=NULL){
-        root->printNodes();
+        root->printNodes(0);
     }
 }
 
 int main()
 {
-    // Construct a BTree of order 3, which stores int data
+
     BTree<int,3> t1;
 
     t1.Insert(1);
@@ -158,14 +159,9 @@ int main()
     t1.Insert(3);
     t1.Insert(2);
 
-   t1.Print(); // Should output the following on the screen:
+    t1.Print();
 
-    /*
-    1,4
-      0
-      2,3
-      5
-    */
+
 
 
 
