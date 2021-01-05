@@ -68,7 +68,7 @@ public:
                     while(children[loop]!=NULL){
                         cout<<endl;
                         cout<<" "<<"";
-                     //   children[loop]->printNodes();
+                        children[loop]->printNodes();
                         loop++;
                         }
                 }
@@ -101,7 +101,7 @@ void BTree<T,order>::Insert(T value)
         root->counter = 1;
     }
     else{
-	if (root->counter == order - 1) {
+	if (root->counter == order - 1&&root->isLeaf==true) {
 		Node<T,order> *newRoot= new Node<T,order>();
 		newRoot->isLeaf = false;
 		newRoot->children[0] = root;
