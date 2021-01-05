@@ -52,7 +52,6 @@ public:
                     }
                 }
                 toSplit->counter = degree -1-1;
-
                 insertkeys(toSplit->key[degree - 1-1]);
                 children[i + 1] = newNode;
 
@@ -60,18 +59,18 @@ public:
 
 
             void printNodes(){
-                int index;
-                for(index=0;index<counter;index++){
+
+                for(int index=0;index<counter;index++){
                     cout<<key[index]<<" ";
-                    if(isLeaf==false){
-                        int loop=0;
-                        while(children[loop]!=NULL){
-                            cout<<endl;
-                            cout<<"  ";
-                            children[loop]->printNodes();
-                            loop++;
+                }
+                if(isLeaf==false){
+                    int loop=0;
+                    while(children[loop]!=NULL){
+                        cout<<endl;
+                        cout<<" "<<"";
+                     //   children[loop]->printNodes();
+                        loop++;
                         }
-                    }
                 }
             }
 
@@ -128,10 +127,14 @@ void BTree<T,order>::Insert(T value)
 				index++;
 			}
 		}
-		curr = curr->children[index];
+		root=curr;
+		curr = root->children[index];
+
 	}
 
 	curr->insertkeys(value);
+
+
     }
 }
 
@@ -150,10 +153,10 @@ int main()
 
     t1.Insert(1);
     t1.Insert(5);
-   t1.Insert(0);
-   t1.Insert(4);
-   t1.Insert(3);
-   // t1.Insert(2);
+    t1.Insert(0);
+    t1.Insert(4);
+    t1.Insert(3);
+    t1.Insert(2);
 
    t1.Print(); // Should output the following on the screen:
 
